@@ -2,6 +2,7 @@
 #include "Fib.h"
 #include <algorithm>
 #include <utility>
+using namespace std;
 
 typedef int Rank;
 
@@ -247,4 +248,5 @@ void Vector<T>::merge ( Rank lo, Rank mi, Rank hi ) {
         if ( ( k < lc ) && ( ! ( j < lb ) || ( C[k] >  B[j] ) ) ) A[i++] = C[k++];
     }
 }
+
 
