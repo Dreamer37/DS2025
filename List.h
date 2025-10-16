@@ -117,7 +117,7 @@ template <typename T>
 List<T>::List ( ListNodePosi(T) p, int n ) { copyNodes ( p, n ); }
 
 template <typename T>
-List<T>::List ( List<T> const& L) { copyNodes ( L.first(), L.size ); }
+List<T>::List ( List<T> const& L) { copyNodes ( L.first(), L._size ); } 
 
 template <typename T>
 List<T>::List ( List<T> const& L, int r, int n ) { copyNodes ( L[r], n ); }
@@ -163,7 +163,7 @@ template <typename T> int List<T>::uniquify() {
     if ( _size < 2 ) return 0;
     int oldSize = _size;
     ListNodePosi(T) p =first(); ListNodePosi(T) q;
-    while ( trailer != ( q = p->data ) )
+    while ( trailer != ( q = p->succ ) )
         if ( p->data != q->data ) p = q;
         else remove ( q );
     return oldSize - _size; 
@@ -230,4 +230,25 @@ void List<T>::mergeSort ( ListNodePosi(T) & p, int n ) {
     ListNodePosi(T) q = p; for ( int i = 0; i < m; i++ ) q = q->succ;
     mergeSort ( p, m );mergeSort ( q, n - m );
     merge ( p, m, *this, q, n - m );
+}
+
+template <typename T>
+void List<T>::reverse() {
+    if (_size < 2) return;
+    for (ListNodePosi(T) p = header; p; p = p->pred) {
+        std::swap(p->pred, p->succ);
+    }
+    std::swap(header, trailer);
+}
+
+template <typename T>
+int List<T>::disordered() const {
+    if (_size < 2) return 0;
+    int count = 0;
+    ListNodePosi(T) p = first();
+    for (int i = 1; i < _size; i++) {
+        if (p->data > p->succ->data) count++;
+        p = p->succ;
+    }
+    return count;
 }
