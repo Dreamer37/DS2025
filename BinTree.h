@@ -1,7 +1,7 @@
 #include<iostream>
-#include<BinNode.h>
-#include<Stack.h>
-#include<Queue.h>
+#include "BinNode.h"
+#include "Stack.h"
+#include "Queue.h"
 using namespace std;
 
 template <typename T> class BinTree {
