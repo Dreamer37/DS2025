@@ -204,13 +204,11 @@ template <typename T> static Rank fibSearch ( T* A, T const& e, Rank lo, Rank hi
 }
 
 template <typename T> void Vector<T>::sort ( Rank lo, Rank hi) {
-    switch ( rand() % 5 )
+    switch ( rand() % 3 )  // 只使用已实现的排序方法
     {
     case 1: bubbleSort ( lo, hi ); break;
-    case 2: selectionSort ( lo, hi ); break;
-    case 3: mergeSort ( lo, hi ); break;
-    case 4: heapSort ( lo, hi ); break;
-    default: quickSort ( lo, hi ); break;
+    case 2: mergeSort ( lo, hi ); break;
+    default: bubbleSort ( lo, hi ); break;  // 使用冒泡排序替代未实现的排序方法
     }
 }
 
@@ -218,10 +216,10 @@ template <typename T> void Vector<T>::sort ( Rank lo, Rank hi, int n) {
     switch ( n )
     {
     case 1: bubbleSort ( lo, hi ); break;
-    case 2: selectionSort ( lo, hi ); break;
+    case 2: bubbleSort ( lo, hi ); break;  // 使用冒泡排序替代未实现的选择排序
     case 3: mergeSort ( lo, hi ); break;
-    case 4: heapSort ( lo, hi ); break;
-    default: quickSort ( lo, hi ); break;
+    case 4: bubbleSort ( lo, hi ); break;  // 使用冒泡排序替代未实现的堆排序
+    default: bubbleSort ( lo, hi ); break; // 使用冒泡排序替代未实现的快速排序
     }
 }
 
@@ -256,7 +254,7 @@ void Vector<T>::merge ( Rank lo, Rank mi, Rank hi ) {
     int lc = hi - mi;T* C = _elem + mi;
     for ( Rank i = 0, j = 0, k = 0; ( j < lb ) || ( k < lc );) {
         if ( ( j < lb ) && ( ! ( k < lc ) || ( B[j] <= C[k] ) ) ) A[i++] = B[j++];
-        if ( ( k < lc ) && ( ! ( j < lb ) || ( C[k] >  B[j] ) ) ) A[i++] = C[k++];
+        if ( ( k < lc ) && ( ! ( j < lb ) || ( C[k] < B[j] ) ) ) A[i++] = C[k++];  // 修复逻辑错误
     }
     delete [] B;
 }

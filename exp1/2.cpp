@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    cout << "Õ»µÄ²âÊÔ£º" << endl;
+    cout << "æ ˆçš„æµ‹è¯•ï¼š" << endl;
     Stack<int> S;
     cout << "S.push(10);" << endl;
     S.push(10);
@@ -11,22 +11,22 @@ int main() {
     S.push(20);
     cout << "S.push(30);" << endl;
     S.push(30);
-    cout << "Õ»¶¥ÔªËØ: " << S.top() << endl;
-    cout << "µ¯³öÕ»¶¥ÔªËØ: " << S.pop() << endl;
-    cout << "ĞÂµÄÕ»¶¥ÔªËØ: " << S.top() << endl;
+    cout << "æ ˆé¡¶å…ƒç´ : " << S.top() << endl;
+    cout << "å¼¹å‡ºæ ˆé¡¶å…ƒç´ : " << S.pop() << endl;
+    cout << "æ–°çš„æ ˆé¡¶å…ƒç´ : " << S.top() << endl;
     
-    cout << "¼ÆËã¼°Äæ²¨À¼±í´ïÊ½²âÊÔ£º" << endl;
+    cout << "è®¡ç®—åŠé€†æ³¢å…°è¡¨è¾¾å¼æµ‹è¯•ï¼š" << endl;
     char formula[] = "3+5*2-8/4";
     char* rpn1 = nullptr;
     float result1 = evaluate(formula, rpn1);
-    cout << "ÖĞ×º±í´ïÊ½: " << formula << endl;
-    cout << "Äæ²¨À¼±í´ïÊ½: " << rpn1 << endl;
-    cout << "¼ÆËã½á¹û: " << result1 << endl;
+    cout << "ä¸­ç¼€è¡¨è¾¾å¼: " << formula << endl;
+    cout << "é€†æ³¢å…°è¡¨è¾¾å¼: " << rpn1 << endl;
+    cout << "è®¡ç®—ç»“æœ: " << result1 << endl;
 
     char formula2[] = "10+(6-4)*3";
     char* rpn2 = nullptr;
     float result2 = evaluate(formula2, rpn2);
-    cout << "ÖĞ×º±í´ïÊ½: " << formula2 << endl;
-    cout << "Äæ²¨À¼±í´ïÊ½: " << rpn2 << endl;
-    cout << "¼ÆËã½á¹û: " << result2 << endl;
+    cout << "ä¸­ç¼€è¡¨è¾¾å¼: " << formula2 << endl;
+    cout << "é€†æ³¢å…°è¡¨è¾¾å¼: " << rpn2 << endl;
+    cout << "è®¡ç®—ç»“æœ: " << result2 << endl;
 }
