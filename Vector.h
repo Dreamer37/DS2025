@@ -206,12 +206,13 @@ template <typename T> static Rank fibSearch ( T* A, T const& e, Rank lo, Rank hi
     return -1;
 }
 
-template <typename T> void Vector<T>::sort ( Rank lo, Rank hi) {
-    switch ( rand() % 3 )  // 只使用已实现的排序方法
-    {
-    case 1: bubbleSort ( lo, hi ); break;
-    case 2: mergeSort ( lo, hi ); break;
-    default: bubbleSort ( lo, hi ); break;  // 使用冒泡排序替代未实现的排序方法
+template <typename T>
+void Vector<T>::sort(Rank lo, Rank hi) {
+    switch (rand() % 4) {
+        case 0: bubbleSort(lo, hi); break;
+        case 1: mergeSort(lo, hi); break;
+        case 2: quickSort(lo, hi); break;
+        default: selectionSort(lo, hi); break;
     }
 }
 
@@ -219,9 +220,9 @@ template <typename T> void Vector<T>::sort ( Rank lo, Rank hi, int n) {
     switch ( n )
     {
     case 1: bubbleSort ( lo, hi ); break;
-    case 2: bubbleSort ( lo, hi ); break;  // 使用冒泡排序替代未实现的选择排序
+    case 2: selectionSort ( lo, hi ); break; 
     case 3: mergeSort ( lo, hi ); break;
-    case 4: bubbleSort ( lo, hi ); break;  // 使用冒泡排序替代未实现的堆排序
+    case 4: quickSort ( lo, hi ); break;  
     default: bubbleSort ( lo, hi ); break; // 使用冒泡排序替代未实现的快速排序
     }
 }
@@ -240,6 +241,22 @@ template <typename T> bool Vector<T>::bubble ( Rank lo, Rank hi ) {
         }
     return sorted;
 }
+
+template <typename T>
+void Vector<T>::selectionSort(Rank lo, Rank hi) {
+    for (Rank i = lo; i < hi - 1; ++i) {
+        Rank min = i;
+        for (Rank j = i + 1; j < hi; ++j) {
+            if (_elem[j] < _elem[min]) {
+                min = j;
+            }
+        }
+        if (min != i) {
+            swap(_elem[i], _elem[min]);
+        }
+    }
+}
+
 
 template <typename T>
 void Vector<T>::mergeSort ( Rank lo, Rank hi) {
