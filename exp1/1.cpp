@@ -24,7 +24,7 @@ public:
     }
 
     bool operator != ( Complex_Num V2 ) const {
-    return ( real != V2.get_real() ) || ( imag != V2.get_real() );  // ´íÎó£ºÁ½´ÎÊ¹ÓÃget_real()
+    return ( real != V2.get_real() ) || ( imag != V2.get_imag() );  // é”™è¯¯ä½¿ç”¨äº†get_real()ï¼Œåº”æ”¹ä¸ºget_imag()
     }
 
     bool operator > ( Complex_Num V2) const {
@@ -93,25 +93,25 @@ int main() {
     }
 
     for(int i = 0; i < V.size(); i++) {
-        // ¸ñÊ½»¯Êä³ö¸´Êı£¨´¦ÀíÕı¸ººÅ£©
+        // æ ¼å¼åŒ–è¾“å‡ºå¤æ•°çš„å®éƒ¨å’Œè™šéƒ¨
         double real = V[i].get_real();
         double imag = V[i].get_imag();
         cout << "(" << real;
         if (imag >= 0) {
             cout << "+" << imag;
         } else {
-            cout << imag;  // Ğé²¿Îª¸ºÊ±Ö±½ÓÊä³ö¸ººÅ
+            cout << imag;  // è™šéƒ¨ä¸ºè´Ÿæ—¶ç›´æ¥è¾“å‡ºæ•°å€¼
         }
         cout << "i" << ")" << endl;
     }
-    //ÂÒĞò
-    // ĞŞ¸´Êı×é³õÊ¼»¯´íÎó
-    Vector<Complex_Num> V_backup(V);  // ´´½¨Ò»¸ö±¸·İ
+    //ä¹±åº
+    // ä¿®æ”¹ä¹±åºçš„èµ·å§‹å’Œç»“æŸä½ç½®
+    Vector<Complex_Num> V_backup(V);  // å¤‡ä»½ä¸€ä¸ªå‰¯æœ¬
     V.unsort( 0, 50 );
 
     cout << "\n" << "After unsort:" << endl;
     for(int i = 0; i < V.size(); i++) {
-        // ¸ñÊ½»¯Êä³ö¸´Êı
+        // æ ¼å¼åŒ–è¾“å‡ºå¤æ•°
         double real = V[i].get_real();
         double imag = V[i].get_imag();
         cout << "(" << real;
@@ -123,16 +123,16 @@ int main() {
         cout << "i" << ")" << endl;
     }
 
-    // ²éÕÒ
+    // æŸ¥æ‰¾
     Complex_Num p = V[ rand()%49 + 1 ];
 
     V.find(p);
 
-    //²åÈë
-    V.insert( 25, Complex_Num(13, -15));  // ĞŞ¸´¹¹Ôìº¯Êıµ÷ÓÃ
+    //æ’å…¥
+    V.insert( 25, Complex_Num(13, -15));  // ä¿®æ”¹æ„é€ å‡½æ•°çš„å‚æ•°
     cout << "\n" << "After insert:" << endl;
     for(int i = 0; i < V.size(); i++) {
-        // ¸ñÊ½»¯Êä³ö¸´Êı
+        // æ ¼å¼åŒ–è¾“å‡ºå¤æ•°
         double real = V[i].get_real();
         double imag = V[i].get_imag();
         cout << "(" << real;
@@ -144,11 +144,11 @@ int main() {
         cout << "i" << ")" << endl;
     }
 
-    //É¾³ı
+    //åˆ é™¤
     V.remove(25);
     cout << "\n" << "After remove:" << endl;
     for(int i = 0; i < V.size(); i++) {
-        // ¸ñÊ½»¯Êä³ö¸´Êı
+        // æ ¼å¼åŒ–è¾“å‡ºå¤æ•°
         double real = V[i].get_real();
         double imag = V[i].get_imag();
         cout << "(" << real;
@@ -159,14 +159,14 @@ int main() {
         }
         cout << "i" << ")" << endl;
     }
-    V = V_backup;  // »Ö¸´
+    V = V_backup;  // æ¢å¤
 
-    //Î¨Ò»»¯
+    //å”¯ä¸€åŒ–
     V[1] = V[5];
     V.deduplicate();
     cout << "\n" << "After deduplicate:" << endl;
     for(int i = 0; i < V.size(); i++) {
-        // ¸ñÊ½»¯Êä³ö¸´Êı
+        // æ ¼å¼åŒ–è¾“å‡ºå¤æ•°
         double real = V[i].get_real();
         double imag = V[i].get_imag();
         cout << "(" << real;
@@ -177,9 +177,9 @@ int main() {
         }
         cout << "i" << ")" << endl;
     }
-    V = V_backup;  // »Ö¸´
+    V = V_backup;  // æ¢å¤
 
-    // Ë³ĞòÅÅĞò
+    // é¡ºåºåºåˆ—
     V.sort(0, V.size(), 1);
     clock_t start0 = clock();
     V.sort(0, V.size(), 1);
@@ -191,12 +191,12 @@ int main() {
     clock_t end1 = clock();
     double time_merge_sequence = (double)(end1 - start1) * 1000.0 / CLOCKS_PER_SEC;
 
-    cout << "Ë³Ğò ¡ª ÆğÅİÅÅĞò: " << time_bubble_sequence 
-         << "ms, ¹é²¢ÅÅĞò: " << time_merge_sequence << "ms" << endl;
+    cout << "é¡ºåº æ—¶ å†’æ³¡æ’åº: " << time_bubble_sequence 
+         << "ms, å½’å¹¶æ’åº: " << time_merge_sequence << "ms" << endl;
 
-    V = V_backup; // »Ö¸´
+    V = V_backup; // æ¢å¤
 
-    // ÂÒĞòÅÅĞò
+    // æ··ä¹±åºåˆ—
     V.unsort(0, 50);
 
     clock_t start2 = clock();
@@ -211,12 +211,12 @@ int main() {
     clock_t end3 = clock();
     double time_merge_muddled = (double)(end3 - start3) * 1000.0 / CLOCKS_PER_SEC;
 
-    cout << "ÂÒĞò ¡ª ÆğÅİÅÅĞò: " << time_bubble_muddled 
-         << "ms, ¹é²¢ÅÅĞò: " << time_merge_muddled << "ms" << endl;
+    cout << "æ··ä¹± æ—¶ å†’æ³¡æ’åº: " << time_bubble_muddled 
+         << "ms, å½’å¹¶æ’åº: " << time_merge_muddled << "ms" << endl;
 
-    V = V_backup; // »Ö¸´
+    V = V_backup; // æ¢å¤
 
-    // ÄæĞòÅÅĞò×¼±¸
+    // é€†åºåºåˆ—æµ‹è¯•
     V.sort(0, V.size(), 1);
     for (int i = 0; i < 25; ++i) {
         Complex_Num temp = V[i];
@@ -241,15 +241,15 @@ int main() {
     V.sort(0, V.size(), 3);
     clock_t end5 = clock();
     double time_merge_reverse = (double)(end5 - start5) * 1000.0 / CLOCKS_PER_SEC;
-    cout << "ÄæĞò ¡ª ÆğÅİÅÅĞò: " << time_bubble_reverse 
-         << "ms, ¹é²¢ÅÅĞò: " << time_merge_reverse << "ms" << endl;
+    cout << "é€†åº æ—¶ å†’æ³¡æ’åº: " << time_bubble_reverse 
+         << "ms, å½’å¹¶æ’åº: " << time_merge_reverse << "ms" << endl;
 
 
-    cout << "\n" << "Ä£²éÕÒ" << endl;    
+    cout << "\n" << "åŒºé—´æŸ¥æ‰¾" << endl;    
     Complex_Num v1(3, 4);
     Complex_Num v2(20, 20); 
     Vector<Complex_Num> result = zonesearch(v1, v2, V);
-    cout << "²éÕÒÇø¼äÎª" << "(3, 4)" << " to " << "(20, 20)" << "µÄ¸´ÊıÓĞ£º" << endl;
+    cout << "æŸ¥æ‰¾èŒƒå›´ä¸º" << "(3, 4)" << " to " << "(20, 20)" << "çš„ç»“æœä¸ºï¼š" << endl;
     for(int i = 0; i < result.size(); i++) {
         double real = result[i].get_real();
         double imag = result[i].get_imag();
