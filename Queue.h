@@ -1,3 +1,6 @@
+#ifndef Queue_H
+#define Queue_H
+
 #include "List.h"
 
 template <typename T> class Queue : public List<T> {
@@ -6,3 +9,5 @@ public:
     T dequeue() { return this->remove ( this->first() ); }
     T& front() { return this->first()->data; }
 }; 
+
+#endif

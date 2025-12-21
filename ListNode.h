@@ -1,3 +1,6 @@
+#ifndef LISTNODE_H
+#define LISTNODE_H
+
 typedef int Rank;
 #define ListNodePosi(T) ListNode<T>*
 
@@ -9,3 +12,5 @@ template <typename T> struct  ListNode {
     ListNodePosi(T) insertAsPred ( T const& e);
     ListNodePosi(T) insertAsSucc ( T const& e);
 };
+
+#endif

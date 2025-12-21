@@ -1,3 +1,5 @@
+#ifndef LIST_H
+#define LIST_H
 #include <iostream>
 
 #include "ListNode.h"
@@ -252,3 +254,5 @@ int List<T>::disordered() const {
     }
     return count;
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include <iostream>
 
 #include <string.h>
@@ -178,3 +181,4 @@ float evaluate ( char* S, char*& RPN ) {
     return opnd.pop();
 }
 
+#endif // STACK_H
