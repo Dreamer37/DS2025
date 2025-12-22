@@ -3,10 +3,11 @@
 #include <string>
 #include <map>
 #include "../Queue.h"
-#include <vector>
+#include "../Vector.h"
 #include <algorithm>
 #include <cctype>
 #include "../Bitmap.h"
+#include "../quickSort.h"
 using namespace std;
 
 struct Node {
@@ -30,40 +31,41 @@ struct Cmp {
 // 参数：字符-频率映射表
 // 返回：哈夫曼树的根节点指针
 Node* buildHuffman(const map<char,int>& freq) {
-    // 用vector存储所有节点，替代priority_queue（若未实现Queue.h可使用此方式）
-    vector<Node*> pool;
-    // 遍历频率表为每个字符创建叶子节点并加入节点池
-    for (auto &p : freq) {
-        Node* node = new Node(p.first, p.second); // p.first=字符，p.second=频率
-        pool.push_back(node);
+    // 使用你自己的 Vector，而不是 std::vector
+    Vector<Node*> pool;
+
+    // 创建叶子节点
+    for (auto& p : freq) {
+        Node* node = new Node(p.first, p.second);
+        pool.insert(node);   // 等价于 push_back
     }
-    // 若节点池为空，说明无有效字符，返回空指针
+
     if (pool.empty()) return nullptr;
-    
-    // 自定义比较器：节点按频率升序排列
-    auto cmp = [](Node* a, Node* b){ return a->freq < b->freq; };
-    
-    // 合并节点，直到节点池只剩1个节点（根节点）
+
+    // 合并节点
     while (pool.size() > 1) {
-        sort(pool.begin(), pool.end(), cmp); // 按频率升序排序节点池
-        
-        // 取出频率最小的两个节点（前两个元素）
-        Node* leftNode = pool[0];
+        // 按频率升序排序
+        pool.sort(0, pool.size());
+
+        // 取频率最小的两个节点
+        Node* leftNode  = pool[0];
         Node* rightNode = pool[1];
-        
-        // 创建合并节点：字符用'^'占位（非叶子节点），频率为两个节点之和
+
+        // 创建父节点
         Node* parentNode = new Node('^', leftNode->freq + rightNode->freq);
-        parentNode->left = leftNode;  // 左孩子为频率较小的节点
-        parentNode->right = rightNode;// 右孩子为频率次小的节点
-        
-        // 从节点池中删除已合并的两个节点
-        pool.erase(pool.begin());
-        pool.erase(pool.begin());
-        // 将合并后的父节点加入节点池
-        pool.push_back(parentNode);
+        parentNode->left  = leftNode;
+        parentNode->right = rightNode;
+
+        // 删除已合并的两个节点
+        pool.remove(0); // 删除第一个
+        pool.remove(0); // 再删一次，原来的第二个现在仍在0位置
+
+        // 插入新节点
+        pool.insert(parentNode);
     }
-    // 节点池中剩余的节点即为哈夫曼树的根节点
-    return pool.front();
+
+    // 剩下的就是根节点
+    return pool[0];
 }
 
 // 生成哈夫曼编码
